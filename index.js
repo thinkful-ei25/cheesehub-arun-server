@@ -5,8 +5,9 @@ const cors = require('cors');
 const morgan = require('morgan');
 
 const { PORT, CLIENT_ORIGIN } = require('./config');
-const { dbConnect } = require('./db-mongoose');
+// const { dbConnect } = require('./db-mongoose');
 // const {dbConnect} = require('./db-knex');
+const cheeseRouter = require('./routers/cheeseRouter');
 
 const app = express();
 
@@ -22,6 +23,8 @@ app.use(
   }),
 );
 
+app.use('/api/cheeses', cheeseRouter);
+
 /* eslint-disable no-console */
 function runServer(port = PORT) {
   const server = app
@@ -36,7 +39,7 @@ function runServer(port = PORT) {
 /* eslint-enable no-console */
 
 if (require.main === module) {
-  dbConnect();
+  // dbConnect();
   runServer();
 }
 
